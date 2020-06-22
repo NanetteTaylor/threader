@@ -5,9 +5,9 @@ A twitter bot which creates threads when given a story or rant as input
 ## Objectives
 
 1. Build a frontend interface in React for taking a user's story
-2. Use fetch or async await to interact with twitter Api
-  - Create tweet objects
-  - Creat a twitter thread with tweet objects
+1. Use fetch or async await to interact with twitter Api
+   1. Create tweet objects
+   1. Create a twitter thread with tweet objects
 
 ## Details
 
