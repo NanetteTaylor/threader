@@ -21,9 +21,18 @@ router.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
-router.post("/twitter", (req, res) => {
-  console.log('Inside Twit');
+router.post("/tweet", (req, res) => {
+  console.log('Inside tweet');
   T.post('statuses/update', { status: req.body.status }, function(err, data, response) {
+    console.log(`ERROR:${err}`);
+    console.log(`RESPONSE:${response}`);
+    res.status(200).send(data);
+  })
+});
+
+router.post("/reply-tweet", (req, res) => {
+  console.log('Inside reply tweet');
+  T.post('statuses/update', { status: req.body.status, in_reply_to_status_id: req.body.replyID  }, function(err, data, response) {
     console.log(`ERROR:${err}`);
     console.log(`RESPONSE:${response}`);
     res.status(200).send(data);
