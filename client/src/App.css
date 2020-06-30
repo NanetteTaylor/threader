@@ -1,9 +1,103 @@
+/* @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&family=Roboto&display=swap');
+
 html {
   background-color: #08aeea;
-  background-image: linear-gradient(45deg, #08aeea 0%, #2af598 100%);
-  background-size: cover;
+  /* background-image: linear-gradient(45deg, #08aeea 0%, #2af598 100%); */
+  background-image: url('https://cdn.hipwallpaper.com/i/5/0/ASKgc3.png');
+  /* background-size: cover; */
+  background-size: auto;
   background-repeat: no-repeat;
   height: 100%;
+}
+
+h2,h3,h4{
+  /* font-family: 'MuseoModerno', cursive; */
+  font-family: 'Roboto', sans-serif;
+}
+
+.threader {
+  width: 70%;
+  margin: 5% auto;
+  padding: 1%;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.threader h1 {
+  text-align: center;
+  font-family: 'MuseoModerno', cursive;
+  font-size: 80px;
+}
+
+.threader p {
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 30px;
+  margin-bottom: 3%;
+}
+
+.main {
+  display: flex;
+}
+.main .profile {
+  width: 50%;
+  text-align: center;
+}
+
+.profile img{
+  border-radius: 50%;
+}
+
+.threader-input {
+  width: 30%;
+  margin: auto auto;
+}
+textarea {
+  width: 90%;
+  /* height: 40px; */
+  font-size: 16px;
+  transition: 0.6s;
+  border: none;
+  border: 3px solid #08aeea;
+  background-color: transparent;
+  padding: 0 3%;
+}
+
+textarea:focus {
+  outline: none;
+  border: 3px solid #35e294e5;
+}
+.button{
+  width: 20%;
+  /* margin: 5%, auto; */
+}
+button{
+  display:inline-block;
+  padding:0.3em 1.2em;
+  margin:0 0.1em 0.1em 0;
+  border:0.16em solid rgba(255,255,255,0);
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-family:'Roboto',sans-serif;
+  /* font-weight:300; */
+  font-size: 18px;
+  background-color:#4e9af1;
+  color:#FFFFFF;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align:center;
+  transition: all 0.2s;
+}
+button:hover{
+  border-color: rgba(255,255,255,1);
+}
+@media all and (max-width:30em){
+  button{
+    display:block;
+    margin:0.2em auto;
+  }
 }
 
 

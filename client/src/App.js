@@ -81,18 +81,22 @@ class App extends React.Component {
 
   render(){
     return (
-      <div className="threader">
+      <div className='threader'>
         <h1>Threader</h1>
-        <div className='profile'>
-          <img src={this.state.profile.profile_image} alt={this.state.profile.username}/>
-          <h4>{`@${this.state.profile.handle}`}</h4>
-          <h5>{`Followers: ${this.state.profile.followers} Following: ${this.state.profile.friends}`}</h5>
-          <h6>{this.state.profile.user_description}</h6>
-        </div>
+        <p>An app for writing beautiful stories as Twitter threads</p>
         <div className='main'>
-          <textarea onChange={(event)=> this.handleInput(event)}/>
-          <button onClick={(event)=> this.handleOnClick(event)} >Submit</button>
-          {/* <p>{this.state.replyID}</p> */}
+          <div className='profile'>
+            <img src={this.state.profile.profile_image} alt={this.state.profile.username}/>
+            <h2>{`@${this.state.profile.handle}`}</h2>
+            <h3>{`Followers: ${this.state.profile.followers} Following: ${this.state.profile.friends}`}</h3>
+            <h4>{this.state.profile.user_description}</h4>
+          </div>
+          <div className='threader-input'>
+            <h3>Hello {this.state.profile.username}, you can type your story here</h3>
+            <textarea onChange={(event)=> this.handleInput(event)} placeholder='Your twitter thread' rows='8'/>
+            <div className='button'><button onClick={(event)=> this.handleOnClick(event)} >Tweet</button></div>
+            {/* <p>{this.state.replyID}</p> */}
+          </div>
         </div>
       </div>
     );

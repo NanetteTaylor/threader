@@ -41,9 +41,6 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 var app = express();
-// view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'jade');
 
 app.use(cors());
 app.use(logger('dev'));
@@ -64,6 +61,13 @@ app.get("/", function(req, res, next) {
   res.send("Access the API at path /api");
 });
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.get('/login', function (req, res) {
+  res.render('login');
+});
+
 // app.get("/",passport.authenticate('twitter'));
 
 app.use("/api", apiRouter);
@@ -74,10 +78,10 @@ app.get('/twitter-callback',
   passport.authenticate('twitter', { failureRedirect: '/' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    // res.redirect('http://127.0.0.1:3000/');
+    res.redirect('http://127.0.0.1:3000/');
     // console.log(req);
     // console.log(req.session);
-    res.send("Welcome Back Go to <a src='http://127.0.0.1:3000/'>Threader</a>");
+    // res.send("You're logged in");
     // res.redirect('http://127.0.0.1:3000/');
   });
 
