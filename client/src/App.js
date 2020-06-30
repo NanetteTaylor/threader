@@ -8,8 +8,22 @@ class App extends React.Component {
       status: null,
       story: [],
       replyID: null,
-      response: null
+      profile: {}
     };
+  }
+
+  componentDidMount() {
+    fetch("/api/twitter-profile")
+      .then(res => res.json())
+      .then(json => {
+        // upon success, update tasks
+        this.setState({ profile: json[0] });
+        // console.log(this.state.tasks);
+      })
+      .catch(error => {
+        // upon failure, show error message
+        console.log(error);
+      });
   }
 
   handleInput(event){
@@ -18,7 +32,7 @@ class App extends React.Component {
 
   async thread(){
     for(let tweet of this.state.story){
-      let response = await fetch("/api/reply-tweet", {
+      let response = await fetch("/api/tweet", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -60,35 +74,43 @@ class App extends React.Component {
 
   handleOnClick(event){
     event.preventDefault();
+    this.setState({story: []});
     this.breakDownStory();
     this.thread();
   }
 
-  async twitterLogin(event){
-    event.preventDefault();
-    let response = await fetch("/api/redirect", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      redirect: "follow"
-    });
-
-    let json = await response.json();
-    this.setState({ response: json});
-  }
-
   render(){
     return (
-      <div className="App">
+      <div className="threader">
         <h1>Threader</h1>
-        <textarea onChange={(event)=> this.handleInput(event)}/>
-        <button onClick={(event)=> this.handleOnClick(event)} >Submit</button>
-        <button onClick={(event) => this.twitterLogin(event)}>Login</button>
-        <p>{this.state.replyID}</p>
+        <div className='profile'>
+          <img src={this.state.profile.profile_image} alt={this.state.profile.username}/>
+          <h4>{`@${this.state.profile.handle}`}</h4>
+          <h5>{`Followers: ${this.state.profile.followers} Following: ${this.state.profile.friends}`}</h5>
+          <h6>{this.state.profile.user_description}</h6>
+        </div>
+        <div className='main'>
+          <textarea onChange={(event)=> this.handleInput(event)}/>
+          <button onClick={(event)=> this.handleOnClick(event)} >Submit</button>
+          {/* <p>{this.state.replyID}</p> */}
+        </div>
       </div>
     );
   }
+
+  // async twitterLogin(event){
+  //   event.preventDefault();
+  //   let response = await fetch("/twitter-login", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json"
+  //     },
+  //     redirect: "follow"
+  //   });
+
+  //   let json = await response.json();
+  //   this.setState({ response: json});
+  // }
 }
 
 export default App;

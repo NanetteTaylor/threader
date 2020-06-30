@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "migrate": "node model/database.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -11,10 +12,14 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.4",
     "oauth-request": "^0.1.0",
+    "passport": "^0.4.1",
+    "passport-twitter": "^1.0.4",
     "twit": "^2.2.11",
     "twitter-oauth-sign": "^1.1.0",
     "twittersignin": "^1.1.0"
