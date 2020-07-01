@@ -66,18 +66,18 @@ _This is a student project that was created at [CodeOp](http://CodeOp.tech), a f
 
 ### Future Roadmap
 
-##### Title Input
+#### Title Input
 
 The app should also take the title of the story and make that the first tweet in a thread and append '- A thread' to it. For example, if the title of a story is "Little Red Riding Hood", the first tweet in the thread will be "Little Red Riding Hood - A thread". The rest of the tweets in the thread will be the story
 
-##### Modals
+#### Modals
 
 After a user submits a story, the app should show a modal giving feedback (success or failure) to the user on whether the thread has been posted or not.
 
-##### React Login
+#### React Login
 
 The login page is currently in a .ejs file in the views folder `views/login.ejs`. I'd like to make a React page which redirects to the `/twitter-login` route of the express server
 
-##### Saving User Stories
+#### Saving User Stories
 
 I'd like to save user information as well as the stories they've shared in a database and show twitter stats on the stories they've posted. So everytime they log into the app, they'll see a list of the stories they've written and posted as well as the twitter statistics on these stories
