@@ -60,9 +60,17 @@ _This is a student project that was created at [CodeOp](http://CodeOp.tech), a f
 
 ### Architecture
 
+#### Structure
+
 ![Application Structure](architecture.png)
 
+#### Database Schema
+
 ![Application Database](database.jpg)
+
+#### API Routes
+
+![API Routes](api_routes.png)
 
 ### Future Roadmap
 
