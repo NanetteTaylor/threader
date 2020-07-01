@@ -7,11 +7,12 @@ class App extends React.Component {
     this.state={
       status: null,
       story: [],
-      replyID: null,
+      replyID: null, // The ID of the tweet to reply to. This is how a thread is created. You need to reply to the tweet to create a thread
       profile: {}
     };
   }
 
+  // fetches current user's profile data and saves it to the states
   componentDidMount() {
     fetch("/api/twitter-profile")
       .then(res => res.json())
@@ -26,10 +27,12 @@ class App extends React.Component {
       });
   }
 
+  // saves user input to 'status' in state
   handleInput(event){
     this.setState({status: event.target.value});
   }
 
+  // loops through the 'story' array in state and posts each status in a thread
   async thread(){
     for(let tweet of this.state.story){
       let response = await fetch("/api/tweet", {
@@ -37,6 +40,7 @@ class App extends React.Component {
         headers: {
           "Content-Type": "application/json"
         },
+        // The 'replyID' is the tweet this status is replying to. When left empty, it doesn't reply to any tweet. It posts the status on its own
         body: JSON.stringify({ status: tweet, replyID: this.state.replyID })
       });
 
@@ -45,6 +49,7 @@ class App extends React.Component {
     }
   }
 
+  // breaks down a user story into tweets, Each tweet is 280 characters or less
   breakDownStory(){
     console.log(`Story array in state is ${this.state.story}`);
     if (this.state.status.length <= 280){
@@ -61,7 +66,7 @@ class App extends React.Component {
           fullWord = true;
         }
         if(fullWord){
-          console.log(`Finished a full tweet with length ${tweet.length}`);
+          // console.log(`Finished a full tweet with length ${tweet.length}`);
           this.state.story.push(tweet.substring(0, tweet.length-1));
           tweet = word + ' ';
           fullWord = false;
@@ -69,7 +74,7 @@ class App extends React.Component {
       }
       this.state.story.push(tweet.substring(0, tweet.length-1));
     }
-    console.log(`Story array in state AFTER is ${this.state.story}`);
+    // console.log(`Story array in state AFTER is ${this.state.story}`);
   }
 
   handleOnClick(event){
@@ -101,20 +106,6 @@ class App extends React.Component {
       </div>
     );
   }
-
-  // async twitterLogin(event){
-  //   event.preventDefault();
-  //   let response = await fetch("/twitter-login", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     },
-  //     redirect: "follow"
-  //   });
-
-  //   let json = await response.json();
-  //   this.setState({ response: json});
-  // }
 }
 
 export default App;

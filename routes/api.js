@@ -11,10 +11,12 @@ router.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
 
+// Tweets on behalf of the user stored in the database at the moment
 router.post("/tweet", async (req, res) => {
-  console.log('Inside tweet');
+  console.log('Inside /tweet');
   var access_key = "";
   var access_token_secret = "";
+  // get user access token and secret from the database
   await db("SELECT * FROM access_keys;")
     .then(results => {
       access_key = results.data[0].token;
@@ -23,7 +25,8 @@ router.post("/tweet", async (req, res) => {
       console.log(access_token_secret);
     })
     .catch(err => console.log(err));
-
+  
+  // create Twit object. This helps to interface with the twitter api seamlessly
   var Twit = require('twit');
   var twitterOauth = new Twit({
     consumer_key: process.env.CONSUMER_KEY,
@@ -32,13 +35,13 @@ router.post("/tweet", async (req, res) => {
     access_token_secret: access_token_secret
   });
 
+  // this uses the Twitter API endpoint for posting tweets. It passes the status (which is the message of the tweet) to the API
   twitterOauth.post('statuses/update', { status: req.body.status, in_reply_to_status_id: req.body.replyID  }, function(err, data, response) {
-    // console.log(`ERROR:${err}`);
-    // console.log(`RESPONSE:${response}`);
     res.status(200).send(data);
   })
 });
 
+// gets a user's profile details from MySQL database
 router.get("/twitter-profile", async (req, res) => {
   db("SELECT username, handle, user_description, followers, friends, profile_image FROM access_keys;")
     .then(results => {
