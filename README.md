@@ -56,8 +56,6 @@ A twitter bot which creates threads when given a story or rant as input
 
 ![Threader User Flow Diagram](user_flow.svg)
 
-_This is a student project that was created at [CodeOp](http://CodeOp.tech), a full stack development bootcamp in Barcelona._
-
 ### Architecture
 
 #### Structure
@@ -89,3 +87,5 @@ The login page is currently in a .ejs file in the views folder `views/login.ejs`
 #### Saving User Stories
 
 I'd like to save user information as well as the stories they've shared in a database and show twitter stats on the stories they've posted. So everytime they log into the app, they'll see a list of the stories they've written and posted as well as the twitter statistics on these stories
+
+_This is a student project that was created at [CodeOp](http://CodeOp.tech), a full stack development bootcamp in Barcelona._
