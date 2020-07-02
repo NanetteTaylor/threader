@@ -10,7 +10,7 @@ A twitter bot which creates threads when given a story or rant as input
    1. Create tweet objects
    1. Create a twitter thread with tweet objects
 
-## Deatils
+## Details
 
 ### Dependencies
 
