@@ -51,7 +51,8 @@ module.exports = async function db(query) {
         } else if (result[0].constructor.name == "OkPacket") {
           // push the first item in result list to data (this accounts for situations
           // such as when the query ends with SELECT LAST_INSERT_ID() and returns an insertId)
-          results.data.push(result[0]);
+          // results.data.push(result[0]);
+          result.forEach(row => results.data.push(row));
         }
 
         con.end();

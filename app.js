@@ -11,28 +11,51 @@ const passport = require("passport");
 const TwitterStrategy = require("passport-twitter").Strategy; // You need to select this to use it specifically for Twitter
 
 
-//Creating the passport oject 
+//Creating the passport object
 passport.use(new TwitterStrategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
   callbackURL: "http://127.0.0.1:5000/twitter-callback",
 }, // This function below gets executed after authentication and twitter redirects to the callback URL
 function(token, tokenSecret, profile, cb) {
-  // Save the user's profile details to the database
-  db(`UPDATE access_keys SET token = '${token}', token_secret = '${tokenSecret}', username = '${profile.displayName}', handle = '${profile._json.screen_name}', user_description = '${profile._json.description}', followers= '${profile._json.followers_count}', friends= '${profile._json.friends_count}', profile_image= '${profile._json.profile_image_url_https}' WHERE id=1;`)
-    .then(results => {
-      console.log(results.data);
-    })
-    .catch(err => console.log(err));
-  return cb(null, profile);
+    console.log(profile);
+  // Save the user's profile details to the
+    db(`SELECT * FROM users WHERE twitter_id = '${profile._json.id_str}';`)
+        .then(results => {
+            console.log(results);
+            if(results.data.length < 1){
+                db(`INSERT INTO users(token,token_secret,username,handle,user_description,followers,friends,profile_image,twitter_id) values('${token}','${tokenSecret}','${profile.displayName}','${profile._json.screen_name}','${profile._json.description}','${profile._json.followers_count}','${profile._json.friends_count}','${profile._json.profile_image_url_https}','${profile._json.id_str}'); SELECT * FROM users WHERE twitter_id='${profile._json.id_str}';`)
+                    .then(result => {
+                        console.log(`INSERTED Twitter data for ${profile._json.screen_name}`);
+                        console.log(result.data);
+                        return cb(null, result.data[1][0]);
+                    })
+                    .catch(err => console.log(err));
+            } else {
+                db(`UPDATE users SET token = '${token}', token_secret = '${tokenSecret}', username = '${profile.displayName}', handle = '${profile._json.screen_name}', user_description = '${profile._json.description}', followers= '${profile._json.followers_count}', friends= '${profile._json.friends_count}', profile_image= '${profile._json.profile_image_url_https}' WHERE twitter_id='${results.data[0].twitter_id}'; SELECT * FROM users WHERE twitter_id = '${profile._json.id_str}';`)
+                    .then(result => {
+                        console.log(`UPDATED Twitter data for ${profile._json.screen_name}`);
+                        console.log(result.data);
+                        return cb(null, result.data[1][0]);
+                    })
+                    .catch(err => console.log(err));
+            }
+        })
+        .catch(err => console.log(err));
 }
 ));
 passport.serializeUser(function(user, cb) {
-  cb(null, user);
+  cb(null, user.id);
 });
 
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
+passport.deserializeUser(function(id, cb) {
+    db(`SELECT * FROM users WHERE id=${id}`)
+        .then(results => {
+            return cb(null, results.data[0]);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 var app = express();
@@ -61,7 +84,13 @@ app.set('view engine', 'ejs');
 app.get('/login', function (req, res) {
   res.render('login');
 });
-
+//twitter logout
+app.get('/logout', (req, res) => {
+    //handle with passport
+    req.logout();
+    req.session.notice = "Has been successfully been logged out!";
+    res.redirect('http://127.0.0.1:3000/main');
+});
 
 app.use("/api", apiRouter);
 
@@ -73,7 +102,8 @@ app.get('/twitter-callback',
   passport.authenticate('twitter', { failureRedirect: '/' }),
   function(req, res) {
     // Redirects the user to the link below. The link is for the React page of the app
-    res.redirect('http://127.0.0.1:3000/');
+    res.cookie('uid', `${req.user.id}`, {maxAge: 7200000});
+    res.redirect('http://127.0.0.1:3000/main');
   });
 
 // Anything that doesn't match the above, send back index.html

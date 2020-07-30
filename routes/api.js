@@ -12,17 +12,18 @@ router.get("/", (req, res) => {
 });
 
 // Tweets on behalf of the user stored in the database at the moment
-router.post("/tweet", async (req, res) => {
+router.post("/tweet/:uid", async (req, res) => {
   console.log('Inside /tweet');
   var access_key = "";
   var access_token_secret = "";
   // get user access token and secret from the database
-  await db("SELECT * FROM access_keys;")
+  await db(`SELECT token, token_secret FROM users WHERE id=${req.params.uid};`)
     .then(results => {
+        // console.log(results);
       access_key = results.data[0].token;
       access_token_secret = results.data[0].token_secret
-      console.log(access_key);
-      console.log(access_token_secret);
+      // console.log(access_key);
+      // console.log(access_token_secret);
     })
     .catch(err => console.log(err));
   
@@ -42,10 +43,10 @@ router.post("/tweet", async (req, res) => {
 });
 
 // gets a user's profile details from MySQL database
-router.get("/twitter-profile", async (req, res) => {
-  db("SELECT username, handle, user_description, followers, friends, profile_image FROM access_keys;")
+router.get("/twitter-profile/:uid", async (req, res) => {
+  db(`SELECT username, handle, user_description, followers, friends, profile_image FROM users WHERE id=${req.params.uid};`)
     .then(results => {
-      res.status(200).send(results.data);
+      res.status(200).send(results.data[0]);
     })
     .catch(err => res.status(500).send(err));
 });
