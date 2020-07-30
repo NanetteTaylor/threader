@@ -73,8 +73,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get("/", function(req, res, next) {
-  res.send("Access the API at path /api");
+  // res.send("Access the API at path /api");
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
