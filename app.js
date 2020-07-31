@@ -74,7 +74,7 @@ app.use(passport.session());
 
 app.get("/", function(req, res, next) {
   // res.send("Access the API at path /api");
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 
