@@ -52,6 +52,7 @@ class Main extends React.Component {
       let json = await response.json();
       this.setState({ replyID: json.id_str});
     }
+    window.location.href = `https://twitter.com/${this.state.profile.handle}`;
   }
 
   // breaks down a user story into tweets, Each tweet is 280 characters or less
