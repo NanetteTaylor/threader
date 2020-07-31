@@ -67,7 +67,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
-// app.use(express.static(path.join(__dirname, '/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use(passport.initialize());
 app.use(passport.session());

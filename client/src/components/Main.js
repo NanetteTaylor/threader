@@ -37,8 +37,8 @@ class Main extends React.Component {
 
   // loops through the 'story' array in state and posts each status in a thread
   async thread(){
-      let uid = window.document.cookie.split('=')[1];
-      console.log(uid);
+    let uid = window.document.cookie.split('=')[1];
+    console.log(uid);
     for(let tweet of this.state.story){
       let response = await fetch(`/api/tweet/${this.state.uid}`, {
         method: "POST",
