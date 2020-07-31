@@ -18,7 +18,7 @@ con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 
-  let sql = "DROP TABLE if exists access_keys; CREATE TABLE access_keys(id INT NOT NULL AUTO_INCREMENT, token VARCHAR(500) NOT NULL, token_secret VARCHAR(500) NOT NULL, username VARCHAR(500) NOT NULL, handle VARCHAR(500) NOT NULL, user_description VARCHAR(500) NOT NULL, followers VARCHAR(500) NOT NULL, friends VARCHAR(500) NOT NULL, profile_image VARCHAR(500) NOT NULL, PRIMARY KEY (id)); INSERT INTO access_keys(token, token_secret, username, handle, user_description, followers, friends, profile_image) VALUES('','','','','','','','');";
+  let sql = "DROP TABLE if exists users; CREATE TABLE users(id INT NOT NULL AUTO_INCREMENT, twitter_id VARCHAR(200), token VARCHAR(500) NOT NULL, token_secret VARCHAR(500) NOT NULL, username VARCHAR(500) NOT NULL, handle VARCHAR(500) NOT NULL, user_description VARCHAR(500), followers VARCHAR(500), friends VARCHAR(500), profile_image VARCHAR(500), PRIMARY KEY (id));";
   con.query(sql, function (err, result) {
     if (err) throw err;
     console.log("Table creation `twitter` was successful!");

@@ -105,7 +105,7 @@ app.get('/twitter-callback',
   function(req, res) {
     // Redirects the user to the link below. The link is for the React page of the app
     res.cookie('uid', `${req.user.id}`, {maxAge: 7200000});
-    res.redirect('http://127.0.0.1:3000/main');
+    res.redirect('/main');
   });
 
 // Anything that doesn't match the above, send back index.html
