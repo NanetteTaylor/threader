@@ -74,18 +74,18 @@ app.use(passport.session());
 
 app.get("/", function(req, res, next) {
   // res.send("Access the API at path /api");
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
 //Renders the login page
-app.get('/login', function (req, res) {
-  res.render('login');
-});
+// app.get('/login', function (req, res) {
+//   res.render('login');
+// });
 //twitter logout
 app.get('/logout', (req, res) => {
     //handle with passport
@@ -110,7 +110,7 @@ app.get('/twitter-callback',
 
 // Anything that doesn't match the above, send back index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 
