@@ -1,17 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@500&family=Roboto&display=swap');
 
-html {
-  /*background-color: #08aeea;*/
-  /* background-image: linear-gradient(45deg, #08aeea 0%, #2af598 100%); */
-  /*background-image: url('https://cdn.hipwallpaper.com/i/5/0/ASKgc3.png');*/
-  /* background-size: cover; */
-  background-size: auto;
-  background-repeat: no-repeat;
-  height: 100%;
-}
-
 h2,h3,h4{
-  /* font-family: 'MuseoModerno', cursive; */
   font-family: 'Roboto', sans-serif;
 }
 
@@ -98,44 +87,3 @@ button:hover{
     margin:0.2em auto;
   }
 }
-
-
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

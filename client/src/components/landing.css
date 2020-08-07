@@ -1,3 +1,10 @@
+.landing{
+    width: 100vw;
+    height: 100vmin;
+    background: url("../images/writing.png") center no-repeat;
+    background-size: cover;
+}
+
 .landing img {
     width: inherit;
     height: inherit;
