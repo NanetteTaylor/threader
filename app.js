@@ -15,7 +15,7 @@ const TwitterStrategy = require("passport-twitter").Strategy; // You need to sel
 passport.use(new TwitterStrategy({
   consumerKey: process.env.CONSUMER_KEY,
   consumerSecret: process.env.CONSUMER_SECRET,
-  callbackURL: "https://fathomless-forest-53308.herokuapp.com/twitter-callback",
+  callbackURL: "http://twitter-threader.herokuapp.com/twitter-callback",
 }, // This function below gets executed after authentication and twitter redirects to the callback URL
 function(token, tokenSecret, profile, cb) {
     console.log(profile);
