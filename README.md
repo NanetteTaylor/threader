@@ -47,7 +47,7 @@ A twitter bot which creates threads when given a story or rant as input
 1. Run `yarn start` in project directory to start the Express server on port 5000
 2. `cd client` and run `npm start` to start client server in development mode with hot reloading in port 3000.
 
-#### App Usage
+#### Starting the app
 
 1. The app starts with a login page served from express at <http://localhost:5000/login>
 2. This eventually redirects to the app page in express on <http://localhost:3000/>
